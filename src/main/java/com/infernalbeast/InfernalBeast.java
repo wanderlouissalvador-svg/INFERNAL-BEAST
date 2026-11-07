@@ -1,6 +1,7 @@
 package com.infernalbeast;
 
 import com.infernalbeast.registry.ModBlocks;
+import com.infernalbeast.registry.ModEntities;
 import com.infernalbeast.registry.ModItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -14,6 +15,7 @@ public class InfernalBeast {
         GeckoLib.initialize();
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ModBlocks.BLOCKS.register(modEventBus);
+        ModEntities.ENTITIES.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
     }
 }
