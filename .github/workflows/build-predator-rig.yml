@@ -1,0 +1,37 @@
+name: Build predator rig (cloud Blender)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rig:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+
+      - name: Check source GLB
+        run: |
+          test -f src/main/resources/assets/infernal_beast/models/entity/predator_source.glb
+
+      - name: Build provisional rig
+        run: |
+          mkdir -p build/predator
+          blender --background --python tools/rig_predator.py -- \
+            src/main/resources/assets/infernal_beast/models/entity/predator_source.glb \
+            build/predator/predator_rigged.glb
+
+      - name: Upload rigged GLB
+        uses: actions/upload-artifact@v4
+        with:
+          name: predator-rigged-glb
+          path: build/predator/predator_rigged.glb
+          if-no-files-found: error
