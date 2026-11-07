@@ -72,7 +72,9 @@ public class InfernalCreatureEntity extends Monster {
             this.playSound(net.minecraft.sounds.SoundEvents.BLAZE_SHOOT, 1.4F, 0.75F);
             this.specialAttackCooldown = 100;
         } else if (this.getType() == ModEntities.VOID_DRAGON.get()) {
-            DragonFireball bolt = new DragonFireball(this.level(), this, aim);
+            DragonFireball bolt = new DragonFireball(
+                    this.level(), this, aim.x, aim.y, aim.z
+            );
             bolt.setPos(this.getX(), this.getY(0.7D), this.getZ());
             this.level().addFreshEntity(bolt);
             this.playSound(net.minecraft.sounds.SoundEvents.ENDER_DRAGON_SHOOT, 1.5F, 0.8F);
